@@ -1,0 +1,15 @@
+.header__link_mobile{
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #FFF;
+    cursor: pointer;
+    margin: 18px auto 40px;
+    transition: .2s;
+}
+
+.header__link_mobile:hover{
+    opacity: .6;
+    transition: .2s;
+}
