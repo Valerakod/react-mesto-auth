@@ -4,10 +4,7 @@ import image404 from "../images/404_error.png";
 export default function Page404() {
   return (
     <>
-      <Link
-        to="/"
-        className="page404"
-      >
+      <Link to="/" className="page404">
         ← Back
       </Link>
       <img

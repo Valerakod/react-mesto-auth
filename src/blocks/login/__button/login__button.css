@@ -1,6 +1,6 @@
 .login__button{
     width: 358px;
-    margin: 230px auto 15px;
+    margin: 229px 3px 3px 262px;
     background-color: #FFF;
     border-radius: 2px;
     border: none;
@@ -16,12 +16,13 @@
     opacity: .85;
     transition: 2s;
     cursor: pointer;
+    
 }
 
 @media (max-width: 768px){
     .login__button{
         width: 260px;
-        margin: 173px auto 20px;
+        margin: 173px 0 0 87px;
         font-size: 16px;
         line-height: 19px;
         padding: 15px 0;

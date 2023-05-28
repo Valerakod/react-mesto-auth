@@ -4,7 +4,7 @@ import Header from "./Header.js";
 import Footer from "./Footer.js";
 import Main from "./Main.js";
 import api from "../utils/Api.js";
-import PopupWithForm from "./PopupWithForm.js";
+import PopupWithConfirmation from "./PopupWithConfirmation.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
@@ -15,7 +15,7 @@ import Register from "./Register.js";
 import InfoTooltip from "./InfoTooltip.js";
 import ProtectedRoute from "./ProtectedRoute.js";
 import auth from "./Auth.js";
-import Page404 from "./Page404";
+import Page404 from "./Page404.js";
 
 function App() {
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isPopupWithConfirmation, setIsPopupWithConfirmation] = useState(false);
 
   const [selectedCard, setSelectedCard] = useState({ name: "", link: "" });
 
@@ -57,6 +58,8 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setSelectedCard({ name: "", link: "" });
+    setIsPopupWithConfirmation(false);
+    setIsInfoTooltip(false);
   }
   function handleCardClick(card) {
     setSelectedCard(card);
@@ -152,7 +155,7 @@ function App() {
       });
   }
 
-  // регистрация
+  // регистрация нового пользователя
   function handleRegister({ registerData, setRegisterData }) {
     auth
       .register(registerData)
@@ -177,12 +180,12 @@ function App() {
           setIsInfoTooltip(false);
         }, 1000);
 
-        console.log(`Внимание! ${err}`);
+        console.log(`Ошибка! ${err}`);
       });
   }
 
   // авторизация
-  function handleAuthorize({ loginData, setLoginData }) {
+  function handleAuthorization({ loginData, setLoginData }) {
     auth
       .authorize(loginData)
       .then((data) => {
@@ -199,7 +202,7 @@ function App() {
       })
 
       .catch((err) => {
-        console.log(`Внимание! ${err}`);
+        console.log(`Ошибка! ${err}`);
       });
   }
 
@@ -217,11 +220,10 @@ function App() {
             }
           })
           .catch((err) => {
-            console.log(`Внимание! ${err}`);
+            console.log(`Ошибка! ${err}`);
           });
       }
     }
-
     handleTokenCheck();
   }, []);
 
@@ -280,13 +282,13 @@ function App() {
               element={
                 <Login
                   setCurrentRoute={setCurrentRoute}
-                  onLogin={handleAuthorize}
+                  onLogin={handleAuthorization}
                   navigate={navigate}
                   loggedIn={loggedIn}
                 />
               }
             />
-            <Route path="/*" element={<Page404 />}></Route>
+            <Route path="/*" element={<Page404 />} />
           </Routes>
 
           {loggedIn && <Footer />}
@@ -309,24 +311,10 @@ function App() {
             onUpdateAvatar={handleUpdateAvatar}
           />
 
-          <PopupWithForm
-            className="popup__form popup__form_delete-card"
-            name="popup"
-          >
-            <h2 className="popup__title">Вы уверены?</h2>
-            <button
-              className="popup__save-button  popup__delete-card"
-              type="submit"
-            >
-              Да
-            </button>
-            <button
-              className="popup__close-button popup__close-button_edit"
-              type="button"
-              aria-label="Закрыть"
-            ></button>
-          </PopupWithForm>
-
+          <PopupWithConfirmation
+            isOpen={isPopupWithConfirmation}
+            onClose={closeAllPopups}
+          />
           <ImagePopup onClose={closeAllPopups} card={selectedCard} />
           <InfoTooltip
             name="registration"
