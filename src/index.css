@@ -43,6 +43,9 @@
 @import url(./blocks/popup/__input-container/popup__input-container.css);
 @import url(./blocks/popup/__field/popup__field.css);
 @import url(./blocks/popup/_dark/popup_dark.css);
+@import url(./blocks/popup/__icon/popup__icon.css);
+@import url(./blocks/popup/__cont/popup__cont.css);
+@import url(./blocks/popup/__text/popup__text.css);
 @import url(./blocks/figure/figure.css);
 @import url(./blocks/element/__heart-count/element__heart-count.css);
 @import url(./blocks/element/__like/element__like.css);

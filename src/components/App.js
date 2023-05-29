@@ -240,12 +240,7 @@ function App() {
     <div className="App">
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
-          <Header
-            currentRoute={currentRoute}
-            loggedIn={loggedIn}
-            email={currentEmail}
-            onOut={handleOutput}
-          />
+          <Header email={currentEmail} onSignOut={handleOutput} currentRoute={currentRoute} />
           <Routes>
             <Route
               exact

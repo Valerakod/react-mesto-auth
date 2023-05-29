@@ -1,47 +1,46 @@
 import logo from "../images/logo.png";
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-function Header({ email, onSignOut }) {
-
+function Header({ email, onSignOut, currentRoute }) {
   const [headerInfo, setHeaderInfo] = useState({});
-  const location = useLocation();
+  //const location = useLocation();
 
   const handleLinkClick = () => {
-    if (location.pathname === "/") {
+    if (currentRoute === "/") {
       onSignOut();
     }
   };
 
   useEffect(() => {
     let headerInfo = {};
-    if (location.pathname === "/") {
+    if (currentRoute === "/") {
       headerInfo = {
         email: email,
-        link: "/sign-in",
+        link: "/signin",
         linkText: "Выйти",
       };
-    } else if (location.pathname === "/sign-up") {
+    } else if (currentRoute === "/signup") {
       headerInfo = {
         email: "",
-        link: "/sign-in",
+        link: "/signin",
         linkText: "Войти",
       };
-    } else if (location.pathname === "/sign-in") {
+    } else if (currentRoute === "/signin") {
       headerInfo = {
         email: "",
-        link: "/sign-up",
+        link: "/signup",
         linkText: "Регистрация",
       };
     }
     setHeaderInfo(headerInfo);
-  }, [ location ]);
+  }, [currentRoute]);
 
   return (
-      <header className="header">
-        <img className="header__logo" src={logo} alt="Логотип" />
-        <div className="header__container">
+    <header className="header">
+      <img className="header__logo" src={logo} alt="Логотип" />
+      <div className="header__container">
         <p className="header__email">{headerInfo.email}</p>
         <Link
           className="header__link"
@@ -51,7 +50,7 @@ function Header({ email, onSignOut }) {
           {headerInfo.linkText}
         </Link>
       </div>
-      </header>
+    </header>
   );
 }
 
