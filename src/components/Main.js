@@ -1,5 +1,5 @@
 import Card from "./Card.js";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 function Main({
@@ -10,9 +10,14 @@ function Main({
   onCardClick,
   onCardLike,
   onCardDelete,
+  setCurrentRoute,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
+  useEffect(() => {
+    setCurrentRoute("/")
+  }, []);
+  
   return (
     <main className="content">
       <section className="profile">

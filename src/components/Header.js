@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 
 function Header({ email, onSignOut, currentRoute }) {
   const [headerInfo, setHeaderInfo] = useState({});
-  //const location = useLocation();
 
   const handleLinkClick = () => {
     if (currentRoute === "/") {

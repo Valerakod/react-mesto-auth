@@ -14,7 +14,7 @@ import Login from "./Login.js";
 import Register from "./Register.js";
 import InfoTooltip from "./InfoTooltip.js";
 import ProtectedRoute from "./ProtectedRoute.js";
-import auth from "./Auth.js";
+import auth from "../utils/Auth.js";
 import Page404 from "./Page404.js";
 
 function App() {
@@ -202,6 +202,7 @@ function App() {
       })
 
       .catch((err) => {
+        setIsInfoTooltip(false);
         console.log(`Ошибка! ${err}`);
       });
   }
@@ -255,6 +256,7 @@ function App() {
                     cards={cards}
                     onCardLike={handleCardLike}
                     onCardDelete={handleCardDelete}
+                    setCurrentRoute={setCurrentRoute}
                   />
                 </ProtectedRoute>
               }
