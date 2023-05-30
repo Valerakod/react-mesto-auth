@@ -1,53 +1,41 @@
 import logo from "../images/logo.png";
 import React from "react";
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Route, Routes, Link } from "react-router-dom";
 
-function Header({ email, onSignOut, currentRoute }) {
-  const [headerInfo, setHeaderInfo] = useState({});
+function Header({ email, onSignOut }) {
+  
 
-  const handleLinkClick = () => {
-    if (currentRoute === "/") {
-      onSignOut();
-    }
-  };
-
-  useEffect(() => {
-    let headerInfo = {};
-    if (currentRoute === "/") {
-      headerInfo = {
-        email: email,
-        link: "/signin",
-        linkText: "Выйти",
-      };
-    } else if (currentRoute === "/signup") {
-      headerInfo = {
-        email: "",
-        link: "/signin",
-        linkText: "Войти",
-      };
-    } else if (currentRoute === "/signin") {
-      headerInfo = {
-        email: "",
-        link: "/signup",
-        linkText: "Регистрация",
-      };
-    }
-    setHeaderInfo(headerInfo);
-  }, [currentRoute]);
 
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt="Логотип" />
       <div className="header__container">
-        <p className="header__email">{headerInfo.email}</p>
-        <Link
+        <p className="header__email">{email}</p>
+        <Routes>
+            <Route
+            path="/signin" element={
+          
+              <Link to="/signup" className="header__link">
+                Регистрация
+              </Link> } />
+            <Route 
+            path="/signup" element={
+              <Link to="/signin" className="header__link">
+                Войти
+              </Link>
+            } />
+          <Route
+          path="/" element={
+        <Link to="/signin"
           className="header__link"
-          to={headerInfo.link}
-          onClick={handleLinkClick}
+          
+          onClick={onSignOut}
         >
-          {headerInfo.linkText}
+          Выйти
         </Link>
+          }
+          />
+          </Routes>
       </div>
     </header>
   );

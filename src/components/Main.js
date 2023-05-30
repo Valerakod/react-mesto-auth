@@ -52,7 +52,7 @@ function Main({
       </section>
 
       <section className="elements">
-        {cards.map((card) => {
+        {cards ? cards.map((card) => {
           return (
             <Card
               key={card._id}
@@ -62,7 +62,7 @@ function Main({
               onCardDelete={onCardDelete}
             />
           );
-        })}
+        }) : ""}
       </section>
     </main>
   );

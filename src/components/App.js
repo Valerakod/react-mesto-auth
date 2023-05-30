@@ -68,13 +68,6 @@ function App() {
     setIsInfoTooltip(true);
   }
 
-  // получаем массив карточек
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((res) => setCards(res))
-      .catch((err) => console.log(err));
-  }, []);
 
   // получаем информацию о пользователе
   useEffect(() => {
@@ -83,6 +76,8 @@ function App() {
       .then((userInfo) => {
         setCurrentUser(userInfo);
       })
+      .then(() => api.getInitialCards())
+      .then((res) => setCards(res))
       .catch((err) => {
         console.log(`Ошибка! ${err}`);
       });
@@ -233,6 +228,7 @@ function App() {
     if (localStorage.getItem("token")) {
       localStorage.removeItem("token");
       navigate("/signin");
+      setCurrentEmail("");
       setLoggedIn(false);
     }
   }
@@ -241,7 +237,11 @@ function App() {
     <div className="App">
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
-          <Header email={currentEmail} onSignOut={handleOutput} currentRoute={currentRoute} />
+          <Header
+            email={currentEmail}
+            onSignOut={handleOutput}
+            currentRoute={currentRoute}
+          />
           <Routes>
             <Route
               exact
