@@ -68,20 +68,35 @@ function App() {
     setIsInfoTooltip(true);
   }
 
+// получаем массив карточек
+  useEffect(() => {
+    if (LoggedIn) {   
+      api
+        .getInitialCards()
+        .then(([cards, user]) => {
+          setCards(cards);
+          setCurrentUser(user);
+        })
+        .catch((err) => {
+          console.log(`Ошибка! ${err}`);
+        });
+    }
+  }, []);
 
   // получаем информацию о пользователе
   useEffect(() => {
+    if (LoggedIn) {
     api
       .getUserInfo()
       .then((userInfo) => {
         setCurrentUser(userInfo);
       })
-      .then(() => api.getInitialCards())
-      .then((res) => setCards(res))
       .catch((err) => {
         console.log(`Ошибка! ${err}`);
       });
+    }
   }, []);
+
 
   //смена информации о пользователе
   function handleUpdateUser(data) {
@@ -197,7 +212,7 @@ function App() {
       })
 
       .catch((err) => {
-        setIsInfoTooltip(false);
+        setIsInfoTooltip(true);
         console.log(`Ошибка! ${err}`);
       });
   }

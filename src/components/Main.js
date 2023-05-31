@@ -15,9 +15,9 @@ function Main({
   const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
-    setCurrentRoute("/")
+    setCurrentRoute("/");
   }, []);
-  
+
   return (
     <main className="content">
       <section className="profile">
@@ -52,17 +52,19 @@ function Main({
       </section>
 
       <section className="elements">
-        {cards ? cards.map((card) => {
-          return (
-            <Card
-              key={card._id}
-              card={card}
-              onCardClick={onCardClick}
-              onCardLike={onCardLike}
-              onCardDelete={onCardDelete}
-            />
-          );
-        }) : ""}
+        {cards
+          ? cards.map((card) => {
+              return (
+                <Card
+                  key={card._id}
+                  card={card}
+                  onCardClick={onCardClick}
+                  onCardLike={onCardLike}
+                  onCardDelete={onCardDelete}
+                />
+              );
+            })
+          : ""}
       </section>
     </main>
   );
