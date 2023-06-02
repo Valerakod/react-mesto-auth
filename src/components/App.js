@@ -70,22 +70,24 @@ function App() {
 
 // получаем массив карточек
   useEffect(() => {
-    if (LoggedIn) {   
+    if (loggedIn) {  
+      
       api
         .getInitialCards()
-        .then(([cards, user]) => {
+        .then((cards) => {
           setCards(cards);
-          setCurrentUser(user);
+          
         })
         .catch((err) => {
           console.log(`Ошибка! ${err}`);
         });
     }
-  }, []);
+  }, [loggedIn]);
 
   // получаем информацию о пользователе
   useEffect(() => {
-    if (LoggedIn) {
+    if (loggedIn) {
+      
     api
       .getUserInfo()
       .then((userInfo) => {
@@ -95,7 +97,7 @@ function App() {
         console.log(`Ошибка! ${err}`);
       });
     }
-  }, []);
+  }, [loggedIn]);
 
 
   //смена информации о пользователе
