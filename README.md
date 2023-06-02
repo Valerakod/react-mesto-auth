@@ -25,7 +25,7 @@
 - ООП
 
 
-### Ссылка на страницу  https://valerakod.github.io/mesto-react/
+### Ссылка на страницу  https://valerakod.github.io/react-mesto-auth/
 ### Работу выполнила студентка Яндекс.Практикум Валерия ЕМЕЦ.
 
 

@@ -203,6 +203,7 @@ function App() {
       .then((data) => {
         if (data.token) {
           setLoggedIn(true);
+          setCurrentEmail(loginData.email);
           navigate("/");
           localStorage.setItem("token", data.token);
 
@@ -215,6 +216,7 @@ function App() {
 
       .catch((err) => {
         setIsInfoTooltip(true);
+        setSuccessRegister(false);
         console.log(`Ошибка! ${err}`);
       });
   }
@@ -233,6 +235,8 @@ function App() {
             }
           })
           .catch((err) => {
+            setIsInfoTooltip(true);
+            setSuccessRegister(false);
             console.log(`Ошибка! ${err}`);
           });
       }
